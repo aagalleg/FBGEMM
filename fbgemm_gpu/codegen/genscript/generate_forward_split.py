@@ -117,7 +117,18 @@ class ForwardSplitGenerator:
                     dense=dense,
                     ssd=ssd,
                     is_index_select=False,
+                    is_sycl=False,
                 )
+        
+        for dense in [True, False]:
+            ddesc = f"{ 'dense_xpu' if dense  else 'split_xpu' }"
+            template.write(
+                f"gen_embedding_forward_{ ddesc }_unweighted_nobag_kernel_small.cpp",
+                dense=dense,
+                ssd=False,
+                is_index_select=False,
+                is_sycl=True,
+            )
 
     @staticmethod
     def generate_kernels() -> None:
