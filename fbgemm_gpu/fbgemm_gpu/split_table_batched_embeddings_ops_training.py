@@ -429,12 +429,7 @@ def apply_split_helper(
 
 
 def get_available_compute_device() -> ComputeDevice:
-    if torch.cuda.is_available():
-        return ComputeDevice.CUDA
-    elif torch.mtia.is_available():
-        return ComputeDevice.MTIA
-    else:
-        return ComputeDevice.CPU
+    return ComputeDevice.get_available()
 
 
 def _next_copy_done_token(prev: int) -> int:
@@ -512,6 +507,9 @@ class SplitTableBatchedEmbeddingBagsCodegen(nn.Module):
             (2) `CUDA` = performing table lookup on GPU
 
             (3) `MTIA` = performing table lookup on MTIA
+
+            (4) `XPU` = performing table lookup on Intel XPU (requires an
+                out-of-tree XPU backend)
 
         feature_table_map (list[int] | None = None): An optional list that
             specifies feature-table mapping. feature_table_map[i] indicates the
