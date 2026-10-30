@@ -991,6 +991,7 @@ class SplitTableBatchedEmbeddingBagsCodegen(nn.Module):
         self.use_mtia: bool = compute_devices[0] == ComputeDevice.MTIA
         # Split TBE has different function schemas for CUDA and CPU.
         # For MTIA device type, it uses the CPU one.
+        # XPU uses the CUDA (GPU) one; its kernels come from an out-of-tree plugin such as fbgemm-xpu.
         self.use_cpu: bool = compute_devices[0] == ComputeDevice.CPU or self.use_mtia
 
         # Check if init is called from QRSplitTableBatchedEmbeddingBagsCodegen
