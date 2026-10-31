@@ -508,8 +508,11 @@ class SplitTableBatchedEmbeddingBagsCodegen(nn.Module):
 
             (3) `MTIA` = performing table lookup on MTIA
 
-            (4) `XPU` = performing table lookup on Intel XPU (requires an
-                out-of-tree XPU backend)
+            (4) `XPU` = performing table lookup on an Intel GPU, 
+                        using kernels supplied by an out-of-tree plugin 
+                        (fbgemm-xpu in intel/torchlib-xpu). Supported 
+                        configurations depend on the plugin and FBGEMM's 
+                        frontend restrictions.
 
         feature_table_map (list[int] | None = None): An optional list that
             specifies feature-table mapping. feature_table_map[i] indicates the
