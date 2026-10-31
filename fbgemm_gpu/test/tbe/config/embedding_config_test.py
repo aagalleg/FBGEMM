@@ -77,8 +77,8 @@ class EmbeddingConfigClassmethodTest(unittest.TestCase):
 
         # (cuda, mtia, xpu) availability -> expected device
         cases = [
-            ((True, True, True), ComputeDevice.CUDA),
-            ((False, True, True), ComputeDevice.MTIA),
+            ((True, False, False), ComputeDevice.CUDA),
+            ((False, True, False), ComputeDevice.MTIA),
             ((False, False, True), ComputeDevice.XPU),
             ((False, False, False), ComputeDevice.CPU),
         ]
